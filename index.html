@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAY GLASS - Thủy Tinh Decor Cao Cấp</title>
+    <style>
+        /* --- ĐỊNH HÌNH PHONG CÁCH TỐI GIẢN HÀN QUỐC / BẮC ÂU --- */
+        :root {
+            --bg-color: #fcfbfa; /* Trắng kem nhẹ tạo cảm giác ấm áp, mộc mạc */
+            --text-color: #2b2b2b;
+            --accent-color: #8c8275; /* Tone màu tro/hổ phách sang trọng */
+            --line-color: #eae7e2;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- THANH ĐIỀU HƯỚNG (HEADER) --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(252, 251, 250, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--line-color);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: #111;
+        }
+
+        .logo span {
+            font-weight: 300;
+            color: var(--accent-color);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            margin-left: 35px;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 4px;
+        }
+
+        /* --- CẤU TRÚC TRANG CHUYỂN TAB --- */
+        .page {
+            display: none;
+            padding: 140px 8% 60px 8%;
+            min-height: 100vh;
+            animation: fadeInPage 0.6s ease forwards;
+        }
+
+        .page.active-page {
+            display: block;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- TRANG 1: TRANG CHỦ (HOME) --- */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 5%;
+            height: 70vh;
+        }
+
+        .hero-content {
+            max-width: 480px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            color: #111;
+        }
+
+        .hero-content p {
+            color: var(--accent-color);
+            font-size: 15px;
+            margin-bottom: 35px;
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        .btn-view-collection {
+            display: inline-block;
+            padding: 14px 35px;
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view-collection:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .hero-banner {
+            flex: 1;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1574926053821-79c5e338a933?q=80&w=1200') center/cover no-repeat;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        /* --- TRANG 2: BỘ SƯU TẬP (PRODUCTS) --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            font-size: 13px;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 40px 30px;
+        }
+
+        .glass-card {
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .glass-img-holder {
+            width: 100%;
+            padding-top: 100%; /* Tỉ lệ vuông 1:1 giống Shopee nhìn rất gọn gàng */
+            position: relative;
+            background-color: #f1ede9;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .glass-card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .glass-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .glass-details {
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .glass-name {
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            color: #222;
+        }
+
+        .glass-type {
+            font-size: 12px;
+            color: var(--accent-color);
+            margin-top: 3px;
+            font-weight: 300;
+        }
+
+        /* --- TRANG 3: CÂU CHUYỆN (STORY) --- */
+        .story-wrapper {
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .story-main-img {
+            width: 100%;
+            height: 450px;
+            background: url('https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1200') center/cover no-repeat;
+            margin-bottom: 40px;
+            border-radius: 2px;
+        }
+
+        .story-content-text {
+            font-size: 15px;
+            font-weight: 300;
+            color: #4a4a4a;
+            line-height: 2;
+            text-align: justify;
+        }
+
+        /* --- TRANG 4: LIÊN HỆ (CONTACT) --- */
+        .contact-wrapper {
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 40px auto 0 auto;
+        }
+
+        .info-panel {
+            width: 40%;
+        }
+
+        .info-panel h3 {
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            color: #111;
+        }
+
+        .info-panel p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 18px;
+            font-weight: 300;
+        }
+
+        .form-panel {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-panel input, .form-panel textarea {
+            width: 100%;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--line-color);
+            margin-bottom: 25px;
+            outline: none;
+            font-family: var(--font-main);
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .form-panel input:focus, .form-panel textarea:focus {
+            border-bottom-color: var(--text-color);
+        }
+
+        .btn-send {
+            align-self: flex-start;
+            padding: 12px 45px;
+            background: var(--text-color);
+            color: var(--bg-color);
+            border: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-send:hover {
+            background: var(--accent-color);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 40px 8%;
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            border-top: 1px solid var(--line-color);
+            margin-top: 80px;
+            font-weight: 300;
+        }
+
+        /* RESPONSIVE TRÊN DI ĐỘNG */
+        @media (max-width: 768px) {
+            header { padding: 20px 5%; }
+            .logo { font-size: 18px; }
+            .page { padding: 110px 5% 40px 5%; }
+            .hero-container { flex-direction: column; height: auto; text-align: center; }
+            .hero-content { max-width: 100%; margin-bottom: 30px; }
+            .hero-banner { width: 100%; height: 300px; }
+            .contact-wrapper { flex-direction: column; }
+            .info-panel, .form-panel { width: 100%; margin-bottom: 40px; }
+            nav a { margin-left: 15px; font-size: 11px; letter-spacing: 1px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- THANH ĐIỀU HƯỚNG TỐI GIẢN -->
+    <header>
+        <div class="logo" onclick="switchTab('home')">MAY<span>GLASS</span></div>
+        <nav>
+            <a href="#" class="nav-item active" onclick="switchTab('home')">Trang chủ</a>
+            <a href="#" class="nav-item" onclick="switchTab('products')">Sản phẩm</a>
+            <a href="#" class="nav-item" onclick="switchTab('story')">Nhật ký</a>
+            <a href="#" class="nav-item" onclick="switchTab('contact')">Liên hệ</a>
+        </nav>
+    </header>
+
+    <!-- TRANG 1: TRANG CHỦ -->
+    <div id="home" class="page active-page">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Gói Gọn Sự Tinh Tế Trong Từng Ngụm Nước</h1>
+                <p>Cảm hứng từ phong cách sống tối giản và ấm cúng. May Glass mang đến những chiếc ly thủy tinh chịu nhiệt với thiết kế vân sóng, hổ phách đầy tính nghệ thuật cho không gian home-cafe của riêng bạn.</p>
+                <a href="#" class="btn-view-collection" onclick="switchTab('products')">Xem bộ sưu tập</a>
+            </div>
+            <div class="hero-banner"></div>
+        </div>
+    </div>
+
+    <!-- TRANG 2: SẢN PHẨM (ẢNH 1:1 ĐẬM CHẤT DECOR) -->
+    <div id="products" class="page">
+        <div class="section-header">
+            <h2>Cảm Hứng Thủy Tinh</h2>
+            <p>Sự trong suốt tinh khiết hòa cùng những vệt bóng đổ của nắng</p>
+        </div>
+        
+        <div class="products-grid">
+            <!-- Ly 1 -->
+            <div class="glass-card">
+                <div class="glass-img-holder">
+                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=600" alt="Ly thủy tinh sọc khía">
+                </div>
+                <div class="glass-details">
+                    <h3 class="glass-name">Ly Thủy Tinh Sọc Khía Origami</h3>
+                    <p class="glass-type">Dáng lùn tinh tế / Chịu nhiệt tốt</p>
+                </div>
+            </div>
+            <!-- Ly 2 -->
+            <div class="glass-card">
+                <div class="glass-img-holder">
+                    <img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=600" alt="Ly thủy tinh màu hổ phách">
+                </div>
+                <div class="glass-details">
+                    <h3 class="glass-name">Ly Amber Glass Gợn Sóng</h3>
+                    <p class="glass-type">Tone màu hổ phách mộc mạc cổ điển</p>
+                </div>
+            </div>
+            <!-- Ly 3 -->
+            <div class="glass-card">
+                <div class="glass-img-holder">
+                    <img src="https://images.unsplash.com/photo-1516685018646-549198525c1b?q=80&w=600" alt="Ly thủy tinh hai lớp">
+                </div>
+                <div class="glass-details">
+                    <h3 class="glass-name">Cốc Thủy Tinh Hai Lớp Cách Nhiệt</h3>
+                    <p class="glass-type">Thiết kế tối giản chống nóng tay</p>
+                </div>
+            </div>
+            <!-- Ly 4 -->
+            <div class="glass-card">
+                <div class="glass-img-holder">
+                    <img src="https://images.unsplash.com/photo-1573362374358-81c4af5472fb?q=80&w=600" alt="Ly Highball dáng cao">
+                </div>
+                <div class="glass-details">
+                    <h3 class="glass-name">Ly Highball Sọc Dọc Retro</h3>
+                    <p class="glass-type">Dáng cao hoàn hảo cho Cold Brew & Soda</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRANG 3: NHẬT KÝ / CÂU CHUYỆN -->
+    <div id="story" class="page">
+        <div class="section-header">
+            <h2>Câu Chuyện Của Mây</h2>
+        </div>
+        <div class="story-wrapper">
+            <div class="story-main-img"></div>
+            <p class="story-content-text">
+                Khởi nguồn từ niềm đam mê với những buổi sáng thong thả bên ly cà phê tự pha tại nhà, May Glass ra đời để mang đến những món đồ thủy tinh mang đậm hơi thở đương đại. Chúng tôi tin rằng, một chiếc ly đẹp không chỉ nâng tầm hương vị của thức uống, mà còn là nét chấm phá nghệ thuật làm bừng sáng góc bàn làm việc hay không gian bếp của bạn. Mỗi sản phẩm tại May Glass đều được lựa chọn kỹ lưỡng từ độ dày, khả năng chịu nhiệt cho đến độ bắt sáng hoàn hảo khi nắng ban mai chiếu vào.
+            </p>
+        </div>
+    </div>
+
+    <!-- TRANG 4: LIÊN HỆ -->
+    <div id="contact" class="page">
+        <div class="section-header">
+            <h2>Ghé Thăm May Glass</h2>
+        </div>
+        <div class="contact-wrapper">
+            <div class="info-panel">
+                <h3>Góc Trưng Bày</h3>
+                <p>Chi nhánh chính: Quận Bình Thạnh, TP. Hồ Chí Minh</p>
+                <p>Trang Shopee chính thức: May Glass HCM</p>
+                <p>Thời gian tư vấn trực tuyến: 08:30 – 21:30</p>
+                <br>
+                <h3>Cam kết từ May</h3>
+                <p>Mọi sản phẩm hư hỏng, bể vỡ do quá trình vận chuyển đều được hỗ trợ đổi trả mới hoàn toàn và nhanh chóng.</p>
+            </div>
+            <form class="form-panel" onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Lời nhắn đã được gửi đến May Glass.');">
+                <input type="text" placeholder="Tên của bạn" required>
+                <input type="email" placeholder="Địa chỉ email" required>
+                <textarea rows="4" placeholder="Để lại lời nhắn hoặc mã sản phẩm bạn cần tư vấn..." required></textarea>
+                <button type="submit" class="btn-send">Gửi Yêu Cầu</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        &copy; 2026 MAY GLASS HCM. Khơi nguồn cảm hứng Home Cafe tối giản.
+    </footer>
+
+    <!-- JAVASCRIPT ĐIỀU HƯỚNG TAB MƯỢT MÀ -->
+    <script>
+        function switchTab(tabId) {
+            // Ẩn tất cả trang
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active-page'));
+
+            // Hiện trang đích
+            const activePage = document.getElementById(tabId);
+            if(activePage) {
+                activePage.classList.add('active-page');
+            }
+
+            // Đổi trạng thái thanh menu
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(item => {
+                item.classList.remove('active');
+                if(item.getAttribute('onclick').includes(tabId)) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Cuộn mượt lên trên cùng
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
